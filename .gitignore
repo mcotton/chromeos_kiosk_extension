@@ -1,0 +1,27 @@
+# --- signing material --------------------------------------------------------
+# The extension ID is derived from this key. It must be backed up somewhere
+# private, and must never reach a public repo: anyone holding it can sign a
+# .crx that Chrome will accept as an update to this extension.
+dist/
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Published artefacts live in docs/ (GitHub Pages) and ARE meant to be tracked.
+# Everything else *.crx is a local build.
+*.crx
+!docs/*.crx
+
+# --- credentials -------------------------------------------------------------
+# Real Managed configuration blobs used while testing. Credentials belong in
+# the Admin console only, never on disk here.
+*.local.json
+policy.json
+managed-config*.json
+chrome-policy*.json
+.env
+.env.*
+
+# --- noise -------------------------------------------------------------------
+.DS_Store

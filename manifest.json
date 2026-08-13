@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Kiosk Sign-In Assistant",
+  "version": "1.0.3",
+  "description": "Fills credentials on the kiosk login page. Credentials and selectors come from Admin console policy, not from this package.",
+  "minimum_chrome_version": "104",
+
+  "update_url": "https://mcottondesign.com/chromeos_kiosk_extension/update.xml",
+
+  "storage": {
+    "managed_schema": "schema.json"
+  },
+
+  "permissions": ["storage"],
+
+  "host_permissions": [
+    "https://*.eagleeyenetworks.com/*"
+  ],
+
+  "content_scripts": [
+    {
+      "matches": ["https://*.eagleeyenetworks.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ]
+}

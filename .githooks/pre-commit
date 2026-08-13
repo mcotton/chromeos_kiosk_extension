@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+#
+# Blocks a commit that would put credentials or signing material into this
+# public repo.
+#
+# Git does not clone hooks, so this lives in a tracked directory and is
+# activated per clone with:
+#
+#     git config core.hooksPath .githooks
+#
+# Because it is local and can be skipped with --no-verify, it is a convenience,
+# not the guarantee. The CI check in .github/workflows/secret-scan.yml is the
+# control that cannot be bypassed.
+
+set -uo pipefail
+
+REPO_ROOT="$(git rev-parse --show-toplevel)"
+exec "$REPO_ROOT/scripts/scan-secrets.sh" --staged

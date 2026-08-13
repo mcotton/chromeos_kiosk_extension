@@ -1,0 +1,86 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Kiosk Sign-In Assistant configuration",
+  "description": "Set per organizational unit in the Google Admin console. Nothing here is baked into the extension package, so credentials can differ per store and be rotated without republishing.",
+  "type": "object",
+  "properties": {
+
+    "username": {
+      "title": "Username",
+      "description": "Account to sign in with. Use a dedicated, view-only, per-store account.",
+      "type": "string"
+    },
+
+    "password": {
+      "title": "Password",
+      "description": "Password for the account above. Readable by anyone who can reach the device's policy, so treat it as a low-privilege shared secret, never a personal or admin credential.",
+      "type": "string"
+    },
+
+    "autoSubmit": {
+      "title": "Submit the form automatically",
+      "description": "If false, fields are filled but a person must click sign in. Useful while testing.",
+      "type": "boolean",
+      "default": true
+    },
+
+    "rememberMe": {
+      "title": "Tick the 'remember me' checkbox",
+      "description": "Kiosk sessions keep their storage between reboots, so a long-lived session cookie is what stops the device needing to sign in every morning. Leave this on.",
+      "type": "boolean",
+      "default": true
+    },
+
+    "rememberMeSelector": {
+      "title": "'Remember me' checkbox CSS selector",
+      "description": "Optional override. Leave empty to auto-detect.",
+      "type": "string"
+    },
+
+    "maxAttempts": {
+      "title": "Maximum sign-in attempts per boot",
+      "description": "Guards against an incorrect password causing an endless retry loop that locks the account out across the whole fleet. Keep this low.",
+      "type": "integer",
+      "default": 3,
+      "minimum": 1,
+      "maximum": 10
+    },
+
+    "usernameSelector": {
+      "title": "Username field CSS selector",
+      "description": "Optional override. Leave empty to auto-detect. Set this if the login page changes and auto-detection stops working - it avoids rebuilding the extension.",
+      "type": "string"
+    },
+
+    "passwordSelector": {
+      "title": "Password field CSS selector",
+      "description": "Optional override. Leave empty to auto-detect.",
+      "type": "string"
+    },
+
+    "submitSelector": {
+      "title": "Submit button CSS selector",
+      "description": "Optional override. Leave empty to auto-detect.",
+      "type": "string"
+    },
+
+    "successSelector": {
+      "title": "Post-login success CSS selector",
+      "description": "Optional. An element that only exists once signed in. If set, the extension stops retrying as soon as it appears.",
+      "type": "string"
+    },
+
+    "errorSelector": {
+      "title": "Login error CSS selector",
+      "description": "Optional. An element shown when credentials are rejected. If set, the extension stops immediately rather than burning through attempts.",
+      "type": "string"
+    },
+
+    "debug": {
+      "title": "Verbose logging",
+      "description": "Logs decisions to the console. Only useful with kiosk troubleshooting tools enabled.",
+      "type": "boolean",
+      "default": false
+    }
+  }
+}
